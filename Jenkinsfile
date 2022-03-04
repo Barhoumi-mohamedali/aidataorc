@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        sh 'pip freeze > requirements.txt && pip install -r requirements.txt'
+        sh 'pip3 freeze > requirements.txt && pip3 install -r requirements.txt'
       }
     }
     stage('test') {
