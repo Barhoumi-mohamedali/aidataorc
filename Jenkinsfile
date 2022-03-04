@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        sh 'pip install -U pip'
+        sh 'pip3 install  pip --user'
         sh 'pip3 freeze > requirements.txt && pip3 install -r  requirements.txt'
         sh 'pip3 install -U --default-timeout=100  virtualenv && virtualenv env -p python3 && source env/bin/activate'
         sh 'python manage.py migrate'
