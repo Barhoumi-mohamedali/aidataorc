@@ -4,7 +4,7 @@ pipeline {
     stage('build') {
       steps {
         sh 'pip3 freeze > requirements.txt && pip3 install -r  requirements.txt'
-        sh 'pip install virtualenv && virtualenv --python=python3.7.2 env && source env/bin/activate'
+        sh 'pip install virtualenv && virtualenv env -p python3 && source env/bin/activate'
         sh 'python manage.py migrate'
 
 
