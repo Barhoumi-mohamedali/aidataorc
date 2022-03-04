@@ -1,5 +1,6 @@
-python  pip install -U pip
-pip freeze > requirements.txt
+sed -i '' 's/[~=]=/>=/' requirements.txt
+pip install -U -r requirements.txt
+pip freeze | sed 's/==/~=/' > requirements.txt
 virtualenv --python=python3.7.2 env
 source env/bin/activate
 python manage.py migrate
