@@ -1,5 +1,8 @@
 pipeline {
-  agent { docker { image 'python:3.7.2'  args '-u root:sudo -v' } }
+  agent { docker { 
+                  image 'python:3.7.2' 
+                  args '-u root:sudo -v' } 
+                 }
   stages {
     stage('build') {
       steps {
