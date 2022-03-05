@@ -13,8 +13,8 @@ pipeline {
       
        sh 'python3 -m  virtualenv venv'
         sh '. venv/bin/activate'   
-         sh  'pip freeze > requirements.txt'
-        sh 'pip install -r requirements.txt'
+         sh  'pip3 freeze > requirements.txt'
+        sh 'pip3 install -r requirements.txt'
        
 
            
