@@ -10,8 +10,8 @@ pipeline {
         echo "Current workspace is ${env.WORKSPACE}"
         sh 'pip3  install  --default-timeout=100  virtualenv --user'
       
-        sh 'virtualenv env -p python3.6'
-        sh '. env/bin/activate'   
+       sh 'python3 -m  virtualenv venv'
+        sh '. venv/bin/activate'   
         sh 'pip install -r requirements.txt'
         sh 'python3 -m  manage migrate'
 
