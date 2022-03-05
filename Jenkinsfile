@@ -6,9 +6,10 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        sh  'virtualenv .venv'
+        sh 'pip install -U --default-timeout=100  virtualenv'
+        sh 'virtualenv .venv'
         sh 'source .venv/bin/activate'
-        sh  'pip install -r requirements.txt'
+        sh 'pip install -r requirements.txt'
         sh 'python manage.py migrate'
 
 
