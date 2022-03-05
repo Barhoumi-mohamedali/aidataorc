@@ -12,7 +12,7 @@ pipeline {
         sh 'python3 -m  virtualenv venv'
            
         sh 'pip install -r requirements.txt'
-        sh 'python3 -m  manage.py migrate'
+        sh 'python3 -m  manage migrate'
 
            
         }
