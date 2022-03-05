@@ -10,7 +10,7 @@ pipeline {
         sh 'pip3  install  --default-timeout=100  virtualenv --user'
         sh 'python3 -m  virtualenv venv'
            
-        sh 'python -m source venv/bin/activate'
+        sh 'python3 -m source venv/bin/activate'
         sh 'pip install -r requirements.txt'
         sh 'python manage.py migrate'
 
