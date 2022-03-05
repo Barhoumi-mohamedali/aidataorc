@@ -21,7 +21,7 @@ pipeline {
     }
     stage('test') {
       steps {
-        sh 'python manage.py runserver 0.0.0.0:8001'
+        sh 'python3 manage.py runserver 0.0.0.0:8001'
       }   
     }
     stage('Deploy') {
