@@ -8,7 +8,7 @@ pipeline {
       steps {
         withEnv(["HOME=${env.WORKSPACE}"]) { // hide user permission for /.local
         sh 'pip3  install  --default-timeout=100  virtualenv --user'
-        sh 'virtualenv venv'
+        sh 'virtualenv -p "which python3.6 " .venv'
         sh 'source .venv/bin/activate'
         sh 'pip install -r requirements.txt'
         sh 'python manage.py migrate'
