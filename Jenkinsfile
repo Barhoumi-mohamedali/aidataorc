@@ -26,7 +26,7 @@ pipeline {
     stage('Test') {
       steps {
         echo "Current step is Test"
-        sh 'python3 -m manage test'
+        sh 'python2 -m manage test'
       }   
     }
     stage('Deploy') {
