@@ -6,7 +6,7 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        withEnv(["HOME=${env.WORKSPACE}"]) {
+        withEnv(["HOME=${env.WORKSPACE}"]) { // hide user permission for /.local
         sh 'pip3  install  --default-timeout=100  virtualenv --user'
         sh 'virtualenv venv'
         sh 'source .venv/bin/activate'
