@@ -23,9 +23,10 @@ pipeline {
         }
       }
     }
-    stage('test') {
+    stage('Test') {
       steps {
-        sh 'python3 -m manage test'
+        echo "Current step is Test"
+        // sh 'python3 -m manage test'
       }   
     }
     stage('Deploy') {
