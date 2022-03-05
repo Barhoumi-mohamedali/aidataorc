@@ -26,11 +26,12 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-       
+        echo "Current step is deployement"
       }   
     }
     stage('Publish results') {
       steps {
+          echo "Current step is Publish results"
       }   
     }
   }
