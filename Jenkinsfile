@@ -4,7 +4,7 @@ pipeline {
                   image 'python:3.6' 
                  } 
                  }
-   try {
+  
   stages {
     stage('build') {
       steps {
@@ -35,17 +35,22 @@ pipeline {
     }
     stage('Publish results') {
       steps {
-          echo "Current step is Publish results"
+       script {
+         try {
+           echo "Current step is Publish results"
           slackSend color: "good", message: "Build successful: `${env.JOB_NAME}#${env.BUILD_NUMBER}` <${env.BUILD_URL}|Open in Jenkins>"
-
-      }   
-    }
-  }
-     }
-
-    catch (err) {
+       }   
+        catch (err) {
         slackSend color: "danger", message: "Build failed :face_with_head_bandage: \n`${env.JOB_NAME}#${env.BUILD_NUMBER}` <${env.BUILD_URL}|Open in Jenkins>"
 
         throw err
     }
+         
+
+      }   
+    }
+  }
+     
+
+ 
 }
