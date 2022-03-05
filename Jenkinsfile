@@ -6,7 +6,7 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        sh 'pip3 -m install  --default-timeout=100  virtualenv --user'
+        sh 'pip3  install  --default-timeout=100  virtualenv --user'
         sh 'virtualenv .venv'
         sh 'source .venv/bin/activate'
         sh 'pip install -r requirements.txt'
