@@ -13,7 +13,7 @@ pipeline {
        sh 'python3 -m  virtualenv venv'
         sh '. venv/bin/activate'   
         sh 'pip install -r requirements.txt'
-        sh 'python3 -m  manage migrate'
+       
 
            
         }
@@ -22,6 +22,15 @@ pipeline {
     stage('test') {
       steps {
         sh 'python manage.py runserver 0.0.0.0:8001'
+      }   
+    }
+    stage('Deploy') {
+      steps {
+       
+      }   
+    }
+    stage('Publish results') {
+      steps {
       }   
     }
   }
