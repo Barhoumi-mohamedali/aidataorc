@@ -13,7 +13,7 @@ pipeline {
           
         sh 'pip3  install  --default-timeout=100  virtualenv --user'
       
-       sh 'python3 -m  virtualenv venv'
+        sh 'python3 -m  virtualenv venv'
         sh '. venv/bin/activate'   
          sh  'pip3 freeze > requirements.txt'
         sh 'pip3 install -r requirements.txt'
@@ -26,7 +26,8 @@ pipeline {
     stage('Test') {
       steps {
         echo "Current step is Test"
-        sh 'python3 -m manage test'
+       // sh 'python3 -m manage test'
+        sh 'python3 manage.py runserver 0.0.0.0:8001'
       }   
     }
     stage('Deploy') {
