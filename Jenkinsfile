@@ -1,11 +1,12 @@
 pipeline {
   agent { docker { 
-                  image 'python:3.7.2' , args:'-u root:root'
+                  image 'python:3.7.2' 
                  } 
                  }
   stages {
     stage('build') {
       steps {
+        withEnv(["HOME=${env.WORKSPACE}"]) {
         sh 'pip3  install  --default-timeout=100  virtualenv --user'
         sh 'virtualenv .venv'
         sh 'source .venv/bin/activate'
@@ -13,7 +14,7 @@ pipeline {
         sh 'python manage.py migrate'
 
 
-
+        }
       }
     }
     stage('test') {
