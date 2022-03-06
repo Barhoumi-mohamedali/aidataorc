@@ -20,6 +20,8 @@ pipeline {
         sh 'pip3 install -r requirements.txt'
        // sh 'su -c .venv.sh '
          sh 'cd /var/lib/jenkins/workspace/PlatfromDataAI/.local/lib/python3.6/site-packages/django'
+         sh 'django-admin --version'
+
 
        
 
