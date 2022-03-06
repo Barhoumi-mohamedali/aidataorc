@@ -14,8 +14,8 @@ pipeline {
         sh 'pip3  install  --default-timeout=100  virtualenv --user'
       
         sh 'python3 -m  virtualenv venv'
-        sh '. venv/bin/activate'   
-         sh  'pip3 freeze > requirements.txt'
+        sh 'source venv/bin/activate'   
+        sh  'pip3 freeze > requirements.txt'
         sh 'pip3 install -r requirements.txt'
        
 
