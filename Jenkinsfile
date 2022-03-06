@@ -2,7 +2,7 @@ pipeline {
  
   agent { docker { 
                   image 'python:3.6' 
-                  args '-u 0:0' 
+                  args '-u 0:0' // solution for pemission denied sh script
                  } 
                  }
   
