@@ -11,10 +11,10 @@ pipeline {
         withEnv(["HOME=${env.WORKSPACE}"]) { // hide user permission for /.local
         echo "Current workspace is ${env.WORKSPACE}"
         sh 'pip3  install  --default-timeout=100  virtualenv --user'
-      
-        sh 'python3 -m  virtualenv venv && source venv/bin/activate'
+       sh 'pip3  install  --default-timeout=100  python3-venv --user'
+        sh 'python3 -m  virtualenv venv'
         
-       // sh 'source venv/bin/activate'   
+       sh 'source venv/bin/activate'   
         sh  'pip3 freeze > requirements.txt'
         sh 'pip3 install -r requirements.txt'
        
