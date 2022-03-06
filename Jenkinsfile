@@ -2,6 +2,7 @@ pipeline {
  
   agent { docker { 
                   image 'python:3.6' 
+                  args '-u 0:0' // solution for pemission denied sh script
                  } 
                  }
   
@@ -10,23 +11,17 @@ pipeline {
       steps {
         withEnv(["HOME=${env.WORKSPACE}"]) { // hide user permission for /.local
         echo "Current workspace is ${env.WORKSPACE}"
-        sh 'pip3  install  --default-timeout=100  virtualenv --user'
-        sh 'python3 -m  virtualenv venv'
-        sh 'env.sh'
-        sh 'source venv/bin/activate'   
-        sh  'pip3 freeze > requirements.txt'
-        sh 'pip3 install -r requirements.txt'
-       
-
-           
-        
+          sh "docker-composer build"
+          sh "docker-compose up -d"
+         
         }
       }
     }
     stage('Test') {
       steps {
         echo "Current step is Test"
-       sh 'python3 -m manage test'
+        sh 'python3 ./manage.py test'
+     //  sh 'python3 -m manage test'
         //sh 'python3 manage.py runserver 0.0.0.0:8001'
       }   
     }
@@ -35,7 +30,7 @@ pipeline {
         echo "Current step is deployement"
       }   
     }
-    stage('Publish results') {
+    stage('Publish results (Slack)') {
       steps {
        script {
          try {
