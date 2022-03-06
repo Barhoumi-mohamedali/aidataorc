@@ -1,3 +1,3 @@
 #!/bin/sh
 cd myproject
-sourve venv/bin/activate
+source venv/bin/activate
