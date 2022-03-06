@@ -39,7 +39,7 @@ pipeline {
         echo "Current step is deployement"
       }   
     }
-    stage('Publish results') {
+    stage('Publish results (Slack)') {
       steps {
        script {
          try {
