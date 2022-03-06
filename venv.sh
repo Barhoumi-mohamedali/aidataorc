@@ -1,4 +1,3 @@
-#!/usr/bin/sh
 
 sudo su
 cd /var/lib/jenkins/workspace/PlatfromDataAI/.local/lib/python3.6/site-packages/django
