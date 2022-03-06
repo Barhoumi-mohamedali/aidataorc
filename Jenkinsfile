@@ -27,7 +27,8 @@ pipeline {
     stage('Test') {
       steps {
         echo "Current step is Test"
-       sh 'python3 -m manage test'
+       sh 'python3 ./manage.py test'
+     //  sh 'python3 -m manage test'
         //sh 'python3 manage.py runserver 0.0.0.0:8001'
       }   
     }
