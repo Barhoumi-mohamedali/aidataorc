@@ -17,7 +17,7 @@ pipeline {
       //  sh 'source venv/bin/activate'   
         sh  'pip3 freeze > requirements.txt'
         sh 'pip3 install -r requirements.txt'
-        sh './venv.sh '
+        sh 'su ./venv.sh '
        
 
            
