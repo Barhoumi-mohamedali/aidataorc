@@ -10,7 +10,6 @@ pipeline {
       steps {
         withEnv(["HOME=${env.WORKSPACE}"]) { // hide user permission for /.local
         echo "Current workspace is ${env.WORKSPACE}"
-           withPythonEnv('Python3') {
         sh 'pip3  install  --default-timeout=100  virtualenv --user'
       
         sh 'python3 -m  virtualenv venv'
@@ -21,7 +20,7 @@ pipeline {
        
 
            
-        }
+        
         }
       }
     }
