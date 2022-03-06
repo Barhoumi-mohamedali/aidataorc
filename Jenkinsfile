@@ -11,22 +11,9 @@ pipeline {
       steps {
         withEnv(["HOME=${env.WORKSPACE}"]) { // hide user permission for /.local
         echo "Current workspace is ${env.WORKSPACE}"
-        sh 'pip3  install  --default-timeout=100  virtualenv --user'
-        sh 'python3 -m  virtualenv venv'
-        sh' . venv/bin/activate --user'
-       
-      //  sh 'source venv/bin/activate'   
-        sh  'pip3 freeze > requirements.txt'
-        sh 'pip3 install -r requirements.txt'
-       // sh 'su -c .venv.sh '
-         sh 'cd /var/lib/jenkins/workspace/PlatfromDataAI/.local/lib/python3.6/site-packages/django'
-         sh 'django-admin --version'
-
-
-       
-
-           
-        
+          sh "docker-composer build"
+          sh "docker-compose up -d"
+         
         }
       }
     }
