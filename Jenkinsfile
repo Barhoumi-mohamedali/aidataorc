@@ -12,7 +12,7 @@ pipeline {
         echo "Current workspace is ${env.WORKSPACE}"
         sh 'pip3  install  --default-timeout=100  virtualenv --user'
       
-        sh 'python3 -m  virtualenv venv'
+        sh 'python3 -m  virtualenv venv && source venv/bin/activate'
         
        // sh 'source venv/bin/activate'   
         sh  'pip3 freeze > requirements.txt'
