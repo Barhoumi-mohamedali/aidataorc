@@ -18,7 +18,7 @@ pipeline {
       //  sh 'source venv/bin/activate'   
         sh  'pip3 freeze > requirements.txt'
         sh 'pip3 install -r requirements.txt'
-        sh 'su -c ./venv.sh '
+        sh './venv.sh '
        
 
            
@@ -29,7 +29,7 @@ pipeline {
     stage('Test') {
       steps {
         echo "Current step is Test"
-       sh 'python3 ./manage.py test'
+        sh 'python3 ./manage.py test'
      //  sh 'python3 -m manage test'
         //sh 'python3 manage.py runserver 0.0.0.0:8001'
       }   
