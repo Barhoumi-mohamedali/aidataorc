@@ -1,1 +1,2 @@
-pip freeze > requirements.txt
+psycopg2-binary
+Django==2.0.7
