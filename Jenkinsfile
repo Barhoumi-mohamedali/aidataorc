@@ -40,7 +40,7 @@ pipeline {
        
         echo "Current step is deployement"
        kubernetesDeploy{ 
-        configs:"DjangoPostgresql.yml",
+        configs: "DjangoPostgresql.yml",
         kubeconfigId: 'KUBERNETES_CLUSTER_CONFIG',
          enableConfigSubstitution : True
          }
