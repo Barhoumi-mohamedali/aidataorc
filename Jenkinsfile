@@ -1,32 +1,43 @@
 pipeline {
+ //environment {  PATH = "$PATH:/usr/local/bin" }
+  //agent { docker { image 'python:3.6' args '-u 0:0' // solution for pemission denied sh scrip  }   }
  
-  agent { docker { 
-                  image 'python:3.6' 
-                  args '-u 0:0' // solution for pemission denied sh script
-                 } 
-                 }
-  
-  stages {
+  agent any
+              
+ stages {
     stage('build') {
       steps {
-        withEnv(["HOME=${env.WORKSPACE}"]) { // hide user permission for /.local
-        echo "Current workspace is ${env.WORKSPACE}"
-          sh "docker-composer build"
-          sh "docker-compose up -d"
-         
+       withEnv(["PATH=$PATH:~/.local/bin"]){
+        echo "Current workspace is $PATH:/usr/local/bin"
+         sh "/usr/local/bin/docker-compose  -f docker-compose.yml build"
+       
         }
       }
     }
     stage('Test') {
       steps {
         echo "Current step is Test"
-        sh 'python3 ./manage.py test'
-     //  sh 'python3 -m manage test'
-        //sh 'python3 manage.py runserver 0.0.0.0:8001'
+       sh "/usr/local/bin/docker-compose up -d"
       }   
     }
-    stage('Deploy') {
+    stage('Puch To Docker Hub Registry ') {
       steps {
+       
+            withCredentials([usernamePassword(credentialsId: 'DOCKER_HCREDENTIALS', passwordVariable: 'DockerPassword', usernameVariable: 'DockerUsername')]) {   
+           
+           echo "Current step is Puch To Docker Hub Registry"
+             sh 'echo $DockerPassword | docker login -u $DockerUsername --password-stdin'
+          
+
+        } 
+     // myregistryhost  sh 'docker build -t barhoumimohamedalengineer/dataplaformai:latest -f docker-compose.yml'  
+       sh  'docker image tag barhoumimohamedalengineer/dataplaformai:latest  myregistryhost:5000/barhoumimohamedalengineer/dataplaformai:latest   '
+       sh 'docker image push barhoumimohamedalengineer/dataplaformai:latest'
+      }   
+    }
+    stage('Deploy Application to K8s Cluster') {
+      steps {
+       
         echo "Current step is deployement"
       }   
     }
@@ -51,3 +62,6 @@ pipeline {
 
  
 }
+     
+         
+     
