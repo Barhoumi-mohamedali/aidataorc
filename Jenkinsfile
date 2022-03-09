@@ -39,11 +39,11 @@ pipeline {
       steps {
        
         echo "Current step is deployement"
-       kubernetesDeploy{ 
+       kubernetesDeploy(
         configs: "DjangoPostgresql.yml",
         kubeconfigId: 'KUBERNETES_CLUSTER_CONFIG',
          enableConfigSubstitution : True
-         }
+         )
       }   
     }
     stage('Publish results (Slack)') {
