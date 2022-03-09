@@ -1,0 +1,75 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: django-store-service
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  type: NodePort
+  selector:
+    app: store
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: store-deployment
+spec:
+  selector:
+    matchLabels:
+      app: store
+  template:
+    metadata:
+      labels:
+        app: store
+    spec:
+      containers:
+        - name: store
+          image: django-store
+          ports:
+            - containerPort: 8000
+          env:
+            - name: POSTGRES_HOST
+              value: "postgres-service"
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: password
+          envFrom:
+            - configMapRef:
+                name: postgres-configuration
+        - name: store-nginx
+          image: django-store-nginx
+          ports:
+            - containerPort: 8080
+      initContainers:
+        - name: init-store-container
+          image: busybox:1.28
+          # Ugly hack to wait for fixed time before starting Django
+          command: ["sh", "-c", "echo Sleeping... && sleep 1 && echo Done."]
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: django-migrations-job
+spec:
+  backoffLimit: 10
+  template:
+    spec:
+      containers:
+        - name: django-migration
+          image: django-store
+          command: ["python", "manage.py", "migrate"]
+          env:
+            - name: POSTGRES_HOST
+              value: "postgres-service"
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-credentials
+                  key: password
+          envFrom:
+            - configMapRef:
+                name: postgres-configuration
+      restartPolicy: Never
