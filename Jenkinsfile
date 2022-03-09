@@ -42,7 +42,7 @@ pipeline {
        kubernetesDeploy(
         configs: "DjangoPostgresql.yml",
         kubeconfigId: 'KUBERNETES_CLUSTER_CONFIG',
-         enableConfigSubstitution : True
+         enableConfigSubstitution : true
          )
       }   
     }
