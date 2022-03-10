@@ -11,6 +11,10 @@ pipeline {
      
      echo "Current step is deployement"
     sh 'envsubst < ./kubernetes/secret.yml | /usr/local/bin/kubectl  apply -f -'
+   sh 'envsubst < ./kubernetes/config_map.yml | /usr/local/bin/kubectl  create -f -'
+       sh 'envsubst < ./kubernetes/postgre/component_postgre.yml | /usr/local/bin/kubectl  kubectl apply -f -'
+   
+
     //  sh 'kubectl apply -f ./kubernetes/secret.yml'
      // sh 'kubectl create -f ./kubernetes/config_map.yml'
     //  sh 'kubectl apply -f ./kubernetes/postgre/component_postgre.yml'
