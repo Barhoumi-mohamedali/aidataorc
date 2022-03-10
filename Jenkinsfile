@@ -9,6 +9,7 @@ pipeline {
     stage('Deploy Application to K8s Cluster') {
       steps {
        container('kubectl') {
+        sh 'envsubst < ./kubernetes/secret.yml | kubectl apply -f -'
     sh "kubectl get pods"
   }
       //  echo "Current step is deployement"
