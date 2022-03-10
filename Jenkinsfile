@@ -4,37 +4,7 @@ pipeline {
  
   agent any
               
- stages {
-    stage('build') {
-      steps {
-       withEnv(["PATH=$PATH:~/.local/bin"]){
-        echo "Current workspace is $PATH:/usr/local/bin"
-         sh "/usr/local/bin/docker-compose  -f docker-compose.yml build"
-       
-        }
-      }
-    }
-    stage('Test') {
-      steps {
-        echo "Current step is Test"
-       sh "/usr/local/bin/docker-compose up -d"
-      }   
-    }
-    stage('Puch To Docker Hub Registry ') {
-      steps {
-       
-            withCredentials([usernamePassword(credentialsId: 'DOCKER_HCREDENTIALS', passwordVariable: 'DockerPassword', usernameVariable: 'DockerUsername')]) {   
-           
-           echo "Current step is Puch To Docker Hub Registry"
-             sh 'echo $DockerPassword | docker login -u $DockerUsername --password-stdin'
-          
 
-        } 
-     // myregistryhost  sh 'docker build -t barhoumimohamedalengineer/dataplaformai:latest -f docker-compose.yml'  
-       sh  'docker image tag barhoumimohamedalengineer/dataplaformai:latest  myregistryhost:5000/barhoumimohamedalengineer/dataplaformai:latest   '
-       sh 'docker image push barhoumimohamedalengineer/dataplaformai:latest'
-      }   
-    }
     stage('Deploy Application to K8s Cluster') {
       steps {
        
