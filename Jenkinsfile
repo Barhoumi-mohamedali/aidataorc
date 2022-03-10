@@ -17,7 +17,7 @@ pipeline {
 
     //  sh 'kubectl apply -f ./kubernetes/secret.yml'
      // sh 'kubectl create -f ./kubernetes/config_map.yml'
-    //  sh 'kubectl apply -f ./kubernetes/Postgre/component_postgre.yml'
+    //  sh 'kubectl apply -f ./kubernetes/ostgre/component_postgre.yml'
 
        
       }   
