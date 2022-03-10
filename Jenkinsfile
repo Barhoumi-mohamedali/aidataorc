@@ -4,7 +4,7 @@ pipeline {
  
   agent any
               
-
+ stages{
     stage('Deploy Application to K8s Cluster') {
       steps {
        
@@ -33,7 +33,7 @@ pipeline {
       }   
     }
   }
-     
+}  
 
  
 
