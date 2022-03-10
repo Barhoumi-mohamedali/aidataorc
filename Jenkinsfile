@@ -8,13 +8,18 @@ pipeline {
    
     stage('Deploy Application to K8s Cluster') {
       steps {
+     
+     echo "Current step is deployement"
+    sh 'envsubst < ./kubernetes/secret.yml | /usr/local/bin/kubectl  apply -f -'
+   sh 'envsubst < ./kubernetes/config_map.yml | /usr/local/bin/kubectl  create -f -'
+       sh 'envsubst < ./kubernetes/postgre/component_postgre.yml | /usr/local/bin/kubectl   apply -f -'
+   
+
+    //  sh 'kubectl apply -f ./kubernetes/secret.yml'
+     // sh 'kubectl create -f ./kubernetes/config_map.yml'
+    //  sh 'kubectl apply -f ./kubernetes/ostgre/component_postgre.yml'
+
        
-        echo "Current step is deployement"
-       kubernetesDeploy(
-        configs: "DjangoPostgresql.yaml",
-        kubeconfigId: 'KUBERNETES_CLUSTER_CONFIG',
-         enableConfigSubstitution : true
-         )
       }   
     }
     stage('Publish results (Slack)') {
