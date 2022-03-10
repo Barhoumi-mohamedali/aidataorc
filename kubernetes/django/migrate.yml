@@ -7,8 +7,8 @@ spec:
     spec:
       containers:
       - name: django-job-container
-        image: django-postgresql
-        imagePullPolicy: Always
+        image: smriti111/django-postgres
+        imagePullPolicy: IfNotPresent
         command: ["python","./manage.py", "migrate"]
         env:
         - name: POSTGRES_USER
