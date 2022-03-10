@@ -9,11 +9,13 @@ pipeline {
     stage('Deploy Application to K8s Cluster') {
       steps {
      
-     echo "Current step is deployement"
-    sh 'envsubst < ./kubernetes/secret.yml | /usr/local/bin/kubectl  apply -f -'
-   sh 'envsubst < ./kubernetes/config_map.yml | /usr/local/bin/kubectl  create -f -'
-       sh 'envsubst < ./kubernetes/postgres/component_postgres.yml | /usr/local/bin/kubectl   apply -f -'
+       echo "Current step is deployement"
+       sh 'envsubst < ./kubernetes/secret.yml | /usr/local/bin/kubectl  apply -f -'
+       sh 'envsubst < ./kubernetes/config_map.yml | /usr/local/bin/kubectl  create -f -'
+       sh 'envsubst < ./kubernetes/postgres/component_postgres.yml | /usr/local/bin/kubectl apply -f -'
+       sh 'envsubst < ./kubernetes/ingress_service.yml | /usr/local/bin/kubectl apply -f -'
    
+
 
     //  sh 'kubectl apply -f ./kubernetes/secret.yml'
      // sh 'kubectl create -f ./kubernetes/config_map.yml'
