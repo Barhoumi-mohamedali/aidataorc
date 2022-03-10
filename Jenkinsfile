@@ -14,6 +14,8 @@ pipeline {
        sh 'envsubst < ./kubernetes/config_map.yml | /usr/local/bin/kubectl  create -f -'
        sh 'envsubst < ./kubernetes/postgres/component_postgres.yml | /usr/local/bin/kubectl apply -f -'
        sh 'envsubst < ./kubernetes/ingress_service.yml | /usr/local/bin/kubectl apply -f -'
+        sh 'envsubst < ./kubernetes/django/component_django.yml | /usr/local/bin/kubectl apply -f -'
+        sh 'envsubst < ./kubernetes/django/migrate.yml | /usr/local/bin/kubectl apply -f -'
    
 
 
