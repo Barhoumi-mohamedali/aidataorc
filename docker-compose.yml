@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:11.1
+  db-init:
+    build:
+      context: .
+      dockerfile: docker/db-init/Dockerfile
+    depends_on:
+      - db
+  app:
+    image:  barhoumimohamedalengineer/dataplaformai:latest
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile
+    volumes:
+      - .:/code
+    network_mode: "host"
+    ports:
+      - "8001:8001"
+    depends_on:
+      - db
