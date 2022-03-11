@@ -10,12 +10,19 @@ pipeline {
       steps {
      
        echo "Current step is deployement"
-       sh 'envsubst < ./kubernetes/secret.yml | /usr/local/bin/kubectl  apply -f -'
+   /**    sh 'envsubst < ./kubernetes/secret.yml | /usr/local/bin/kubectl  apply -f -'
        sh 'envsubst < ./kubernetes/config_map.yml | /usr/local/bin/kubectl  create -f -'
        sh 'envsubst < ./kubernetes/postgres/component_postgres.yml | /usr/local/bin/kubectl apply -f -'
        sh 'envsubst < ./kubernetes/ingress_service.yml | /usr/local/bin/kubectl apply -f -'
         sh 'envsubst < ./kubernetes/django/component_django.yml | /usr/local/bin/kubectl apply -f -'
-        sh 'envsubst < ./kubernetes/django/migrate.yml | /usr/local/bin/kubectl apply -f -'
+        sh 'envsubst < ./kubernetes/django/migrate.yml | /usr/local/bin/kubectl apply -f -' **/
+       
+         sh 'envsubst < ./kub/kubernetes/database/replication-controller.yaml | /usr/local/bin/kubectl  create -f -'
+         sh 'envsubst < ./kub/kubernetes/database/service.yaml | /usr/local/bin/kubectl  create -f -'
+       
+        sh 'envsubst < ./kub/kubernetes/app/replication-controller-orange.yaml | /usr/local/bin/kubectl  create -f -'
+         sh 'envsubst < ./kub/kubernetes/app/service.yaml | /usr/local/bin/kubectl  create -f -'
+
    
 
 
