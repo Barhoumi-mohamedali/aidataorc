@@ -17,11 +17,11 @@ pipeline {
         sh 'envsubst < ./kubernetes/django/component_django.yml | /usr/local/bin/kubectl apply -f -'
         sh 'envsubst < ./kubernetes/django/migrate.yml | /usr/local/bin/kubectl apply -f -' **/
        
-         sh 'envsubst < ./kub/kubernetes/database/replication-controller.yaml | /usr/local/bin/kubectl  create -f -'
-         sh 'envsubst < ./kub/kubernetes/database/service.yaml | /usr/local/bin/kubectl  create -f -'
+         sh 'envsubst < ./kub/database/replication-controller.yaml | /usr/local/bin/kubectl  create -f -'
+         sh 'envsubst < ./kub/database/service.yaml | /usr/local/bin/kubectl  create -f -'
        
-        sh 'envsubst < ./kub/kubernetes/app/replication-controller-orange.yaml | /usr/local/bin/kubectl  create -f -'
-         sh 'envsubst < ./kub/kubernetes/app/service.yaml | /usr/local/bin/kubectl  create -f -'
+        sh 'envsubst < ./kub/app/replication-controller-orange.yaml | /usr/local/bin/kubectl  create -f -'
+         sh 'envsubst < ./kub/app/service.yaml | /usr/local/bin/kubectl  create -f -'
 
    
 
