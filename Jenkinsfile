@@ -22,7 +22,7 @@ pipeline {
        
         sh 'envsubst < ./kube/app/replication-controller-orange.yaml | /usr/local/bin/kubectl  create -f -'
          sh 'envsubst < ./kube/app/service.yaml | /usr/local/bin/kubectl  create -f -'
-        sh 'envsubst < ./kube/app/configToMap | /usr/local/bin/kubectl  create -f -'
+      //  sh 'envsubst < ./kube/app/configToMap | /usr/local/bin/kubectl  create -f -'
 
  
 
