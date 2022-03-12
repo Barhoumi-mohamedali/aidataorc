@@ -11,3 +11,5 @@ spec:
   selector:
     name: app
   type: LoadBalancer
+  externalIPs:
+  - 192.168.184.139
