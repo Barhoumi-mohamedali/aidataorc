@@ -5,7 +5,7 @@ pipeline {
   agent any
               
  stages {
-    stage('build') {
+    stage('Construction [Build]') {
       steps {
        withEnv(["PATH=$PATH:~/.local/bin"]){
         echo "Current workspace is $PATH:/usr/local/bin"
@@ -16,7 +16,7 @@ pipeline {
     }
     stage('Test') {
       steps {
-        echo "Current step is Test"
+        echo "L'étape actuelle est  Test"
        sh "/usr/local/bin/docker-compose up -d"
       }   
     }
@@ -25,7 +25,7 @@ pipeline {
        
             withCredentials([usernamePassword(credentialsId: 'DOCKER_HCREDENTIALS', passwordVariable: 'DockerPassword', usernameVariable: 'DockerUsername')]) {   
            
-           echo "Current step is Puch To Docker Hub Registry"
+           echo "L'étape actuelle est Puch To Docker Hub Registry"
              sh 'echo $DockerPassword | docker login -u $DockerUsername --password-stdin'
           
 
@@ -35,10 +35,10 @@ pipeline {
        sh 'docker image push barhoumimohamedalengineer/dataplaformai:latest'
       }   
     }
-    stage('Deploy Application to K8s Cluster') {
+    stage('Déployer application sur K8s Cluster') {
       steps {
        
-        echo "Current step is deployement"
+        echo "L'étape actuelle est deployement"
        kubernetesDeploy(
         configs: "DjangoPostgresql.yaml",
         kubeconfigId: 'KUBERNETES_CLUSTER_CONFIG',
@@ -46,11 +46,11 @@ pipeline {
          )
       }   
     }
-    stage('Publish results (Slack)') {
+    stage('Publier les résultats (Slack)') {
       steps {
        script {
          try {
-           echo "Current step is Publish results"
+           echo "L'étape actuelle est Publier le résultat"
           slackSend color: "good", message: "Construction avec succès: `${env.JOB_NAME}#${env.BUILD_NUMBER}` <${env.BUILD_URL}|Ouvrir dans Jenkins>"
        }   
         catch (err) {
