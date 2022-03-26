@@ -51,10 +51,10 @@ pipeline {
        script {
          try {
            echo "Current step is Publish results"
-          slackSend color: "good", message: "Build successful: `${env.JOB_NAME}#${env.BUILD_NUMBER}` <${env.BUILD_URL}|Open in Jenkins>"
+          slackSend color: "good", message: "Construction avec succès: `${env.JOB_NAME}#${env.BUILD_NUMBER}` <${env.BUILD_URL}|Ouvrir dans Jenkins>"
        }   
         catch (err) {
-        slackSend color: "danger", message: "Build failed :face_with_head_bandage: \n`${env.JOB_NAME}#${env.BUILD_NUMBER}` <${env.BUILD_URL}|Open in Jenkins>"
+        slackSend color: "danger", message: "Construction avec succès :face_with_head_bandage: \n`${env.JOB_NAME}#${env.BUILD_NUMBER}` <${env.BUILD_URL}|Ouvrir dans Jenkins>"
 
         throw err
     }
