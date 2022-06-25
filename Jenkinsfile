@@ -30,6 +30,10 @@ pipeline {
           
 
         } 
+       //You can push a new image to this repository using the CLI
+
+//docker tag local-image:tagname new-repo:tagname
+//docker push new-repo:tagname
      // myregistryhost  sh 'docker build -t barhoumimohamedalengineer/dataplaformai:latest -f docker-compose.yml'  
        sh  'docker image tag barhoumimohamedalengineer/dataplaformai:latest  myregistryhost:5000/barhoumimohamedalengineer/dataplaformai:latest   '
        sh 'docker image push barhoumimohamedalengineer/dataplaformai:latest'
