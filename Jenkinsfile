@@ -50,7 +50,7 @@ pipeline {
          )
       }   
     }
-    stage('Publier les résultats (Slack)') {
+    stage('Publier les résultats [Slack]') {
       steps {
        script {
          try {
